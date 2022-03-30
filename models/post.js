@@ -13,4 +13,5 @@ post.init(
   }
 );
 
+//export
 module.exports = post;

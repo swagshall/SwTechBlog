@@ -1,30 +1,45 @@
+// create router 
 const router = require('express').Router();
-const { Post, Comment, User } = require('../models/');
+//connect to post comment and user models 
+const { post, comment, user } = require('../models/');
+console.log(post);
 
 // get all posts for homepage
 router.get('/', async (req, res) => {
+
+  //console to see how far the code was going for debugging purposes 
+  console.log('inside / my home routes')
   try {
-    const postData = await Post.findAll({
-      include: [User],
+    //find all post 
+    const postData = await post.findAll({
+      include: [user],
     });
 
+
+    console.log('postData', postData)
     const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts);
+
 
     res.render('allPost', { posts });
-  } catch (err) {
+  } 
+  //if error return error 
+  catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
-// get single post
+// get single post by id 
 router.get('/post/:id', async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id, {
+    //find post by primary key 
+    const postData = await post.findByPk(req.params.id, {
       include: [
-        User,
+        user,
         {
-          model: Comment,
-          include: [User],
+          model: comment,
+          include: [user],
         },
       ],
     });
@@ -32,8 +47,11 @@ router.get('/post/:id', async (req, res) => {
     if (postData) {
       const post = postData.get({ plain: true });
 
+      //connect to single post handelbars 
       res.render('singlePost', { post });
-    } else {
+    } 
+    //else returna 404 error status 
+    else {
       res.status(404).end();
     }
   } catch (err) {
@@ -41,22 +59,28 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+//get route with login 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
+    //redirect to home route 
     res.redirect('/');
     return;
   }
 
+  //connect to login haneldbars 
   res.render('login');
 });
 
 router.get('/signUp', (req, res) => {
   if (req.session.loggedIn) {
+    //redirect to home route 
     res.redirect('/');
     return;
   }
 
+  //connect to sign up haneldbars
   res.render('signUp');
 });
 
+//export 
 module.exports = router;
