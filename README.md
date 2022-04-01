@@ -34,3 +34,4 @@
     For any questions the owner of this repo can be contacted through thier GitHub:swagshall 
 
  ## images 
+ <img src="./assets/techBlog.png" alt="screenshot 1">
