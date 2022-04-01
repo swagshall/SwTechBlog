@@ -7,13 +7,13 @@ const withAuth = require('../utils/auth');
 //create a get route to get all posts to be displayed on the dashboard 
 router.get('/', withAuth, async (req, res) => {
   try {
-    const postData = await post.findAll({
+    const pdataPost = await post.findAll({
       where: {
         userId: req.session.userId,
       },
     });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const posts = dataPost.map((post) => post.get({ plain: true }));
 
     //call to handelbars 
     res.render('allPostAdmin', {
@@ -39,10 +39,10 @@ router.get('/new', withAuth, (req, res) => {
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     //find post by primary key 
-    const postData = await post.findByPk(req.params.id);
+    const dataPost = await post.findByPk(req.params.id);
 
-    if (postData) {
-      const post = postData.get({ plain: true });
+    if (dataPost) {
+      const post = dataPost.get({ plain: true });
 
       //call to edit post handelbars 
       res.render('editPost', {

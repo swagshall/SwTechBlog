@@ -11,13 +11,13 @@ router.get('/', async (req, res) => {
   console.log('inside / my home routes')
   try {
     //find all post 
-    const postData = await post.findAll({
+    const postD = await post.findAll({
       include: [user],
     });
 
 
-    console.log('postData', postData)
-    const posts = postData.map((post) => post.get({ plain: true }));
+    console.log('postData', postD)
+    const posts = postD.map((post) => post.get({ plain: true }));
     console.log(posts);
 
 
@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     //find post by primary key 
-    const postData = await post.findByPk(req.params.id, {
+    const postD = await post.findByPk(req.params.id, {
       include: [
         user,
         {
@@ -44,8 +44,8 @@ router.get('/post/:id', async (req, res) => {
       ],
     });
 
-    if (postData) {
-      const post = postData.get({ plain: true });
+    if (postD) {
+      const post = postD.get({ plain: true });
 
       //connect to single post handelbars 
       res.render('singlePost', { post });

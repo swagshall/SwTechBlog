@@ -6,7 +6,7 @@ const { user } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     //the body of the json for creating a new user req a username and pass
-    const newUser = await user.create({
+    const createNewUser = await user.create({
       username: req.body.username,
       password: req.body.password,
     });
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
       req.session.username = newUser.username;
       req.session.loggedIn = true;
 
-      res.json(newUser);
+      res.json(createNewUser);
     });
   } 
   //if error return error 
@@ -41,10 +41,10 @@ router.post('/login', async (req, res) => {
     }
 
     //if there is such a user check the password to make sure it matches the user 
-    const validPassword = user.checkPassword(req.body.password);
+    const validPass = user.checkPassword(req.body.password);
 
     //if its not a valid password return no user found or password is wrong 
-    if (!validPassword) {
+    if (!validPass) {
       res.status(400).json({ message: 'No such user found!' });
       return;
     }
