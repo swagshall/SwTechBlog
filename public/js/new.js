@@ -15,9 +15,11 @@ const newFormHandler = async function(event) {
     headers: { 'Content-Type': 'application/json' },
   });
 
+  //move to dashboard
   document.location.replace('/dashboard');
 };
 
 document
   .querySelector('#new-post-form')
+  //on submit got to new form handler 
   .addEventListener('submit', newFormHandler);
