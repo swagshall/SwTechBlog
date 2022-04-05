@@ -33,5 +33,7 @@
   ## Questions 
     For any questions the owner of this repo can be contacted through thier GitHub:swagshall 
 
+ ## Deployed link 
+    For the deployed link please visit this link: https://sw-tech-blog-hw.herokuapp.com/
  ## images 
  <img src="./assets/techBlog.png" alt="screenshot 1">
