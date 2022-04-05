@@ -7,7 +7,7 @@ const withAuth = require('../utils/auth');
 //create a get route to get all posts to be displayed on the dashboard 
 router.get('/', withAuth, async (req, res) => {
   try {
-    const pdataPost = await post.findAll({
+    const dataPost = await post.findAll({
       where: {
         userId: req.session.userId,
       },
